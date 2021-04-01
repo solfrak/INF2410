@@ -3,10 +3,16 @@
 #include "Decorateur.h"
 
 
-TEST_CASE("I don't know what i'm doing"){
-    User* teacher = new DecorateurTeacher(new ConcreteUser("Samuel"));
-    User* student = new DecorateurStudent(new ConcreteUser("Will"));
+TEST_CASE("Test decorateur pour professeur"){
+    User* teacher = new DecorateurTeacher(new BaseUser("Samuel"));
+    
+    REQUIRE(teacher->printUser() == "Samuel est un professeur");
+    REQUIRE(teacher->ajouterChanson() == "une chanson est ete ajoute par Samuel");
+}
 
-    REQUIRE(teacher->printUser() == "this is a teacher Samuel");
-    REQUIRE(student->printUser() == "this is a student Will");
+TEST_CASE("Test decorateur pour etudiant"){
+    DecorateurStudent* student = new DecorateurStudent(new BaseUser("Will"));
+    
+    REQUIRE(student->printUser() == "Will est un etudiant");
+    REQUIRE(student->jouerChanson() == "Will joue une chanson");
 }

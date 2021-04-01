@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-
+//Classe Utilisateur: il s'agit de la structure pour la classe utilisateur de base
 class User{
     private:
     public:
@@ -12,22 +12,22 @@ class User{
         virtual std::string printUser() const = 0;
 };
 
-class ConcreteUser: public User{
+//Classe Utilisateur de base. Il s'agit de la classe commune à 
+//tout les autres type d'utilisateur (Professeur et Étudiant)
+class BaseUser: public User{
     public:
-        ConcreteUser(std::string n): User(n){}
+        BaseUser(std::string n): User(n){}
         std::string printUser() const override{
             return "";
         }
 };
 
+//Classe décorateur
 class Decorator: public User{
     protected:
         User* user_;
     public:
         Decorator(User* user): user_(user){
-        }
-        std::string printUser() const override{
-            return this->user_->printUser();
         }
 };
 
@@ -36,7 +36,10 @@ class DecorateurTeacher: public Decorator{
         DecorateurTeacher(User* user): Decorator(user){
         }
         std::string printUser() const override{
-            return "this is a teacher " + user_->name_;
+            return user_->name_ + " est un professeur";
+        }
+        std::string ajouterChanson(){
+            return "une chanson est ete ajoute par "  + user_->name_;
         }
 };
 
@@ -45,6 +48,11 @@ class DecorateurStudent: public Decorator{
         DecorateurStudent(User* user): Decorator(user){
         }
         std::string printUser() const override{
-            return "this is a student " + user_->name_;
+            return user_->name_ + " est un etudiant";
+        }
+
+        std::string jouerChanson(){
+            return user_->name_ + " joue une chanson";
         }
 };
+
