@@ -24,22 +24,16 @@ class BaseStudent: public Student{
             return name_;
         }
         std::string fonctionnalite1() const override{
-            return "";
+            return name_ + " joue un morceau";
         }
 };
 
 // Classe décorateur qui sert de base pour tout les decorateurs dérivés
-class Decorator: public Student{
+class Decorator: public BaseStudent{
     protected:
         Student* user_;
     public:
-        Decorator(Student* user): user_(user), Student(user->name_){
-        }
-        std::string printStudent(){
-           return user_->printStudent();
-        }
-        std::string fonctionnalite1(){
-            return user_->fonctionnalite1();
+        Decorator(Student* user): user_(user), BaseStudent(user->name_){
         }
 };
 
@@ -52,8 +46,5 @@ class DecorateurObjectif: public Decorator{
         }
         std::string printStudent() const override{
             return this->user_->printStudent() +" " +  o;
-        }
-        std::string fonctionnalite1() const override{
-            return this->name_ + " joue une chanson";
         }
 };

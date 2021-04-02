@@ -18,8 +18,8 @@ SCENARIO("Test Decorateur"){
     
     Student* student = new DecorateurObjectif("nouvel objectif", new BaseStudent("Will"));
     Student* student2 = new DecorateurObjectif("et doit suivre le rythme", new DecorateurObjectif("doit jouer juste", new BaseStudent("Samuel")));
-    
+
     REQUIRE(student->printStudent() == "Will nouvel objectif");
     REQUIRE(student2->printStudent() == "Samuel doit jouer juste et doit suivre le rythme");
-    REQUIRE(student2->fonctionnalite1() ==  "Samuel joue une chanson");
+    REQUIRE(student2->fonctionnalite1() ==  "Samuel joue un morceau");
 }
