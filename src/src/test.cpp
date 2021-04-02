@@ -23,3 +23,22 @@ SCENARIO("Test Decorateur"){
     REQUIRE(student2->printStudent() == "Samuel doit jouer juste et doit suivre le rythme");
     REQUIRE(student2->fonctionnalite1() ==  "Samuel joue un morceau");
 }
+
+
+SCENARIO("Test de sous-composante du systeme"){
+    PasswordCheck p;
+    REQUIRE(p.getAccountPassword() == "password");
+    REQUIRE(p.isPassCorrect("password") == true);
+    REQUIRE(p.isPassCorrect("autre chose") == false);
+
+
+    UsernameCheck u;
+    REQUIRE(u.getUserName() == "admin");
+    REQUIRE(u.isUserCorrect("admin") == true);
+    REQUIRE(u.isUserCorrect("autre chose") == false);
+
+    BaseStudent b("test");
+    REQUIRE(b.fonctionnalite1() == "test ne fait aucune action");
+    REQUIRE(b.printStudent() == b.name_);
+
+}
