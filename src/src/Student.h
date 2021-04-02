@@ -7,6 +7,7 @@ class Student{
         Student(std::string name): name_(name){}
         virtual ~Student(){}
         virtual std::string printStudent() const = 0;
+        virtual std::string fonctionnalite1() const = 0;
 };
 
 //Classe Utilisateur de base. Il s'agit de la classe commune à 
@@ -16,6 +17,9 @@ class BaseStudent: public Student{
         BaseStudent(std::string n): Student(n){}
         std::string printStudent() const override{
             return name_;
+        }
+        std::string fonctionnalite1() const override{
+            return "";
         }
 };
 
@@ -37,5 +41,8 @@ class DecorateurObjectif: public Decorator{
         }
         std::string printStudent() const override{
             return user_->printStudent() +" " +  o;
+        }
+        std::string fonctionnalite1() const override{
+            return user_->name_ + " joue une chanson";
         }
 };
